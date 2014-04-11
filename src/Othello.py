@@ -2,12 +2,12 @@ import random
 class Othello:
     def __init__(self,boardSize=8):#can pass in any board size
         self.boardSize = boardSize
-        self.NO_PIECE = 0         #constant for no piece in square
-        self.WHITE_PIECE = 1      #constant for white piece in square
-        self.BLACK_PIECE = 2      #constant for black piece in square
-        self.WHITE_PLAYER = 1     #constant for black player
-        self.BLACK_PLAYER = 2     #constant for white player
-        self.NO_PLAYER = 0        #constant for no player
+        self.NO_PIECE = 0                       #constant for no piece in square
+        self.WHITE_PIECE = 1                    #constant for white piece in square
+        self.BLACK_PIECE = 2                        #constant for black piece in square
+        self.WHITE_PLAYER = self.WHITE_PIECE     #constant for black player
+        self.BLACK_PLAYER = self.BLACK_PIECE     #constant for white player
+        self.NO_PLAYER = self.NO_PIECE              #constant for no player
         self.resetGame()
 
     #resets the games state
