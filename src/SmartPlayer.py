@@ -27,7 +27,7 @@ class SmartPlayer:
     def gameOver(self, outcome): #returns a dataset updated based on the argument outcome (-1 loss, 0 draw, 1 win)
         if outcome == 0:
             return None #opted to return none since the new dataset would be the same
-        ds = SupervisedDataSet(boardSize * boardSize, boardSize * boardSize) #might consider having boardSize * boardSize * 3 has input
+        ds = SupervisedDataSet(boardSize * boardSize * 3, boardSize * boardSize) #might consider having boardSize * boardSize * 3 has input
         for t in self.data: #go through all the board configurations we collected from this game and update our desired outcomes
             newTarget = []
             for y in xrange(0,self.boardSize):
@@ -51,8 +51,14 @@ class SmartPlayer:
             for x in xrange(0,self.boardSize):          #Right now we're building 8x8 data inputs, we might want to use 8x8x3 since there's no natural ordering
                 piece = self.game.getPieceAtLocation(x,y);
                 if (piece == self.color):
-                    data.append(2)
-                elif(piece == self.enemy):
+                    data.append(1)
+                else:
+                    data.append(0)
+                if(piece == self.enemy):
+                    data.append(1)
+                else:
+                    data.append(0)
+                if (piece == self.game.NO_PIECE):
                     data.append(1)
                 else:
                     data.append(0)
