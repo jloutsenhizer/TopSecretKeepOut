@@ -109,6 +109,16 @@ class Othello:
                     count += 1
         return count
 
+    def getAllPossibleMoves(self,player):
+        if self.nextToGo != player:
+            return []
+        moves = []
+        for x in xrange(0,self.boardSize):
+            for y in xrange(0,self.boardSize):
+                if (self.isPossibleMove(x,y,player)):
+                    moves.append((x,y))
+        return moves
+
     #returns whether or not a move is allowed
     def isPossibleMove(self,x,y,player):
         return len(self.getPointsOfChange(x,y,player)) > 0

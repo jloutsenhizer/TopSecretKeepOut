@@ -43,7 +43,7 @@ class SmartPlayer:
         return self.ds;
 
 	def getMoves(self): #returns a list of (x, y) pairs that are the viable moves for the argument board configuration
-		return [(0,0)] #TODO: need to determine the posible moves
+		return self.game.getAllPossibleMoves(self.color)
 
     def getMove(self):  #returns the network's choice for "best" move
         data = [];
