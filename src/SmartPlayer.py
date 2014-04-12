@@ -27,7 +27,7 @@ class SmartPlayer:
     def gameOver(self, outcome): #returns a dataset updated based on the argument outcome (-1 loss, 0 draw, 1 win)
         if outcome == 0:
             return None #opted to return none since the new dataset would be the same
-        ds = SupervisedDataSet(boardSize * boardSize * 3, boardSize * boardSize) #might consider having boardSize * boardSize * 3 has input
+        ds = ClassificationDataSet(boardSize * boardSize * 3, boardSize * boardSize,nb_classes=64) #might consider having boardSize * boardSize * 3 has input
         for t in self.data: #go through all the board configurations we collected from this game and update our desired outcomes
             newTarget = []
             for y in xrange(0,self.boardSize):
