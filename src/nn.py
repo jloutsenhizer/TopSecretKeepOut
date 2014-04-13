@@ -18,7 +18,7 @@ import os.path
 import time
 
 count = 0
-while (count < 100):
+while (True):
 	#sets a ClassificationDataSet with 16 inputs and 10 outputs
 	ds = ClassificationDataSet(192,64,nb_classes=64)
 
@@ -70,6 +70,6 @@ while (count < 100):
 		NetworkWriter.writeToFile(nn, "othelloNetwork.xml")
 		print "Terminate now to safely save"
 		time.sleep(3)
-		print "TOO LATE"
-	
+		
+	print count
 	count += 1
