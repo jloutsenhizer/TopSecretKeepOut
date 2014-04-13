@@ -1,6 +1,3 @@
-#Mario Minyon
-#CS 1675
-#HW 3
 from pybrain.tools.customxml.networkwriter import NetworkWriter
 from pybrain.tools.customxml.networkreader import NetworkReader
 from pybrain.datasets import ClassificationDataSet
