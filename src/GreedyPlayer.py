@@ -19,9 +19,9 @@ class GreedyPlayer:
         
         for i in range(len(options)):
             x, y = options[i]
-            val = getPointsofChange(x, y, self.color)
+            val = len(self.game.getPointsOfChange(x, y, self.color))
             
-            if val > max
+            if val > max:
                 max = val
                 move = (x, y)
                 
