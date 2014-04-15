@@ -292,8 +292,24 @@ class Othello:
 
     #prints the board out
     def printBoard(self):
+        print "White Score: " + str(self.getScore(self.WHITE_PLAYER))
+        print "Black Score: " + str(self.getScore(self.BLACK_PLAYER))
+        s = "-"
+        for i in xrange(0,self.boardSize):
+            s += "--"
+        print s
         for y in xrange(0,self.boardSize):
-            s = ""
+            s = "|"
             for x in xrange(0,self.boardSize):
-                s += str(self.board[x][y])
+                if (self.board[x][y] == self.NO_PIECE):
+                    s += " "
+                elif self.board[x][y] == self.WHITE_PIECE:
+                    s += "W"
+                else:
+                    s += "B"
+                s += "|"
+            print s
+            s = "-"
+            for i in xrange(0,self.boardSize):
+                s += "--"
             print s

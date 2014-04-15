@@ -7,6 +7,7 @@ from pybrain.structure import LinearLayer, SigmoidLayer, SoftmaxLayer
 from pybrain.structure import FullConnection
 from SmartPlayer import SmartPlayer
 from RandomPlayer import RandomPlayer
+from GreedyPlayer import GreedyPlayer
 from Othello import Othello
 from Player import playGame
 import sys
@@ -46,17 +47,17 @@ while (True):
 
     othello = Othello()
     smartPlayer = SmartPlayer(nn,othello.boardSize)
-    randomPlayer = RandomPlayer()
+    randomPlayer = GreedyPlayer()
     randomPlayer.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]));
     smartPlayer.newGame(othello,randomPlayer.enemy);
 
     playGame(othello,randomPlayer,smartPlayer)
     if othello.getWinner() == randomPlayer.color:
         outcome = -1
-        print "Random Player wins over Smart Player"
+        print "Greedy Player wins over Smart Player"
     elif othello.getWinner() == smartPlayer.color:
         outcome = 1
-        print "Smart Player wins over Random Player"
+        print "Smart Player wins over Greedy Player"
     else:
         outcome = 0
         print "Tie Game"
