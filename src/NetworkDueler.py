@@ -48,10 +48,12 @@ def tTest(name1,results1,name2):
     print("95% confident that the win rate lies between:")
     print("[" + str(lowerBound) + "," + str(upperBound) + "]")
 
-
-player1 = GreedyPlayer() #change this to some AI you want to look for the win rate of
-player2 = RandomPlayer() #change this to some AI you want to compare against
 othello = Othello()
+
+nn =  NetworkReader.readFrom("othelloNetwork.xml")
+player1 = SmartPlayer(nn,othello.boardSize) #change this to some AI you want to look for the win rate of
+player2 = GreedyPlayer() #change this to some AI you want to compare against
+
 
 numTrials = 10000  #change this number to change the number of iterations,
 tTestInterval = 1.960 #95% confidence with arbitrarily high degree of freedm (might need to change if numTrials is too low!!!)
@@ -62,4 +64,4 @@ for x in xrange(0,numTrials):
     data = runOneTest()
     dataset.append(data)
 
-tTest("Greedy Player",dataset,"Random Player") #update these names so output is readable depending on input
+tTest("Smart Player",dataset,"Greedy Player") #update these names so output is readable depending on input
