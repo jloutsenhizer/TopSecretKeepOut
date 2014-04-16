@@ -6,7 +6,7 @@ from Player import playGame
 from pybrain.tools.customxml.networkreader import NetworkReader
 import random
 
-opponentPlayer = RandomPlayer()  #change this to change the opponent to be testing against
+opponentPlayer = GreedyPlayer()  #change this to change the opponent to be testing against
 
 randomPlayer1 = RandomPlayer()
 
