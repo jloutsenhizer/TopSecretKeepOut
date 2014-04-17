@@ -6,16 +6,6 @@ from Player import playGame
 from pybrain.tools.customxml.networkreader import NetworkReader
 import random
 
-opponentPlayer = GreedyPlayer()  #change this to change the opponent to be testing against
-
-randomPlayer1 = RandomPlayer()
-
-greedyPlayer = GreedyPlayer()
-
-nn =  NetworkReader.readFrom("othelloNetwork.xml")
-smartPlayer = SmartPlayer(nn,8)
-othello = Othello()
-
 def runOneTest():
     rvrP1Wins = 0
     rvrP2Wins = 0
@@ -31,10 +21,10 @@ def runOneTest():
         #print "Iteration " + str(x+1)
         #print "Random vs Random"
         othello.resetGame()
-        randomPlayer1.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
-        opponentPlayer.newGame(othello,randomPlayer1.enemy)
-        playGame(othello,randomPlayer1,opponentPlayer)
-        if othello.getWinner() == randomPlayer1.color:
+        player1.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
+        opponentPlayer.newGame(othello,player1.enemy)
+        playGame(othello,player1,opponentPlayer)
+        if othello.getWinner() == player1.color:
             rvrP1Wins += 1
             #print "Random Player 1 is vicotorious! Glory to the RNG!"
         elif othello.getWinner() == opponentPlayer.color:
@@ -45,10 +35,10 @@ def runOneTest():
             #print "Tie game! :("
 
         othello.resetGame()
-        greedyPlayer.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
-        opponentPlayer.newGame(othello,greedyPlayer.enemy)
-        playGame(othello,greedyPlayer,opponentPlayer)
-        if othello.getWinner() == greedyPlayer.color:
+        player2.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
+        opponentPlayer.newGame(othello,player2.enemy)
+        playGame(othello,player2,opponentPlayer)
+        if othello.getWinner() == player2.color:
             gvrP1Wins += 1
             #print "Random Player 1 is vicotorious! Glory to the RNG!"
         elif othello.getWinner() == opponentPlayer.color:
@@ -59,10 +49,10 @@ def runOneTest():
             #print "Tie game! :("
 
         othello.resetGame()
-        smartPlayer.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
-        opponentPlayer.newGame(othello,smartPlayer.enemy)
-        playGame(othello,smartPlayer,opponentPlayer)
-        if othello.getWinner() == smartPlayer.color:
+        player3.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]))
+        opponentPlayer.newGame(othello,player3.enemy)
+        playGame(othello,player3,opponentPlayer)
+        if othello.getWinner() == player3.color:
             nvrP1Wins += 1
             #print "Smart Player is victorious! Glory to the Machine Brains!"
         elif othello.getWinner() == opponentPlayer.color:
@@ -114,20 +104,33 @@ def tTest(name1,results1,name2,results2):
     else:
         print("0 is outside the interval, therefore we can conclude with 95% confidence that " + name1 + " performs better than " + name2 + " on this dataset.")
 
+
+
+opponentPlayer = RandomPlayer()  #change this to change the opponent to be testing against
+
+nn = NetworkReader.readFrom("othelloNetwork1.xml")
+player1 = SmartPlayer(nn,8)
+nn = NetworkReader.readFrom("othelloNetwork2.xml")
+player2 = SmartPlayer(nn,8)
+nn = NetworkReader.readFrom("othelloNetwork3.xml")
+player3 = SmartPlayer(nn,8)
+othello = Othello()
+
+
 numTrials = 10000  #change this number to change the number of iterations,
 
-dataRandom = []
-dataGreedy = []
-dataNetwork = []
+data1 = []
+data2 = []
+data3 = []
 for x in xrange(0,numTrials):
     print "Iteration " + str(x+1)
     data = runOneTest()
-    dataRandom.append(data[0])
-    dataGreedy.append(data[1])
-    dataNetwork.append(data[2])
+    data1.append(data[0])
+    data2.append(data[1])
+    data3.append(data[2])
 
-tTest("Neural Network Player",dataNetwork,"Random Player",dataRandom)
+tTest("NN1 Player",data1,"NN2 Player",data2)
 print ""
-tTest("Neural Network Player",dataNetwork,"Greedy Player",dataGreedy)
+tTest("NN2 Player",data2,"NN3 Player",data3)
 print ""
-tTest("Random Player",dataRandom,"Greedy Player",dataGreedy)
+tTest("NN1 Player",data1,"NN3 Player",data3)

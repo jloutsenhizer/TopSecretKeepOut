@@ -9,7 +9,7 @@ from Othello import Othello
 
 	Note:  I'd like to draw your attention to the gameOver method.  I made some design choices here about the update rules; we should discuss any disagreements.
 '''
-class SmartPlayer:
+class SmartPlayer2:
     def __init__(self, network, boardSize):
         self.boardSize = boardSize
         self.network = network

@@ -64,4 +64,4 @@ for x in xrange(0,numTrials):
     data = runOneTest()
     dataset.append(data)
 
-tTest("Smart Player",dataset,"Greedy Player") #update these names so output is readable depending on input
+tTest("Smart Player Original",dataset,"Random Player") #update these names so output is readable depending on input
