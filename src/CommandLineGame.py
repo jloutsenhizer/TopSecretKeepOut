@@ -5,10 +5,12 @@ from Othello import Othello
 from Player import playGame
 from HumanPlayer import HumanPlayer
 from pybrain.tools.customxml.networkreader import NetworkReader
+from TacticalPlayer import TacticalPlayer
 import random
 
-nn =  NetworkReader.readFrom("othelloNetwork.xml")
-opponentPlayer = SmartPlayer(nn,8)  #change this to change the opponent to be testing against
+#nn =  NetworkReader.readFrom("othelloNetwork.xml")
+#opponentPlayer = SmartPlayer(nn,8)  #change this to change the opponent to be testing against
+opponentPlayer = TacticalPlayer()
 humanPlayer = HumanPlayer()
 
 othello = Othello()

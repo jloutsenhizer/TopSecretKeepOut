@@ -83,7 +83,7 @@ class TacticalPlayer:
                 
         if max != 0:
             x, y = move
-            print "(", x, ",", y, ")"
+            #print "(", x, ",", y, ")"
             return move
                 
         # next look for side spaces not adjacent to corners
@@ -100,7 +100,7 @@ class TacticalPlayer:
                 
         if max != 0:
             x, y = move
-            print "(", x, ",", y, ")"
+            #print "(", x, ",", y, ")"
             return move
                 
         # next go greedy while avoiding corner adjacent places
@@ -117,7 +117,7 @@ class TacticalPlayer:
                 
         if max != 0:
             x, y = move
-            print "(", x, ",", y, ")"
+            #print "(", x, ",", y, ")"
             return move
             
         # just take whatever we can get
@@ -130,7 +130,7 @@ class TacticalPlayer:
                 move = (x, y)
                 
         x, y = move
-        print "(", x, ",", y, ")"
+        #print "(", x, ",", y, ")"
         return move
 
 
