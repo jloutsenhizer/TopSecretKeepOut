@@ -1,6 +1,7 @@
 from SmartPlayer import SmartPlayer
 from RandomPlayer import RandomPlayer
 from GreedyPlayer import GreedyPlayer
+from TacticalPlayer import TacticalPlayer
 from Othello import Othello
 from Player import playGame
 from pybrain.tools.customxml.networkreader import NetworkReader
@@ -16,7 +17,7 @@ def runOneTest():
     elif othello.getWinner() == player2.color:
         return 0.0
     else:
-        return 0.
+        return 0.0
 
 def vectorSubtract(v1,v2):
     result = []
@@ -52,7 +53,7 @@ othello = Othello()
 
 nn =  NetworkReader.readFrom("othelloNetwork.xml")
 player1 = SmartPlayer(nn,othello.boardSize) #change this to some AI you want to look for the win rate of
-player2 = GreedyPlayer() #change this to some AI you want to compare against
+player2 = TacticalPlayer() #change this to some AI you want to compare against
 
 
 numTrials = 10000  #change this number to change the number of iterations,
@@ -64,4 +65,4 @@ for x in xrange(0,numTrials):
     data = runOneTest()
     dataset.append(data)
 
-tTest("Smart Player Original",dataset,"Random Player") #update these names so output is readable depending on input
+tTest("Network Player",dataset,"Tactical Player") #update these names so output is readable depending on input
