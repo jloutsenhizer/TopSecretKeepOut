@@ -419,10 +419,8 @@ while (True):
         print "Tie Game"
 
 
-    dds = smartPlayer.gameOver(outcome)
-    if (dds != None):
-    	for dat in dds:
-    		ds.addSample(dat[0], dat[2])
+    ds = smartPlayer.gameOver(outcome)
+    if (ds != None):
         trainer = BackpropTrainer(nn, dataset=ds)
         trainer.trainUntilConvergence(maxEpochs=100)
         NetworkWriter.writeToFile(nn, "othelloNetwork7.xml")
