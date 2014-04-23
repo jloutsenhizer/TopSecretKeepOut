@@ -14,6 +14,11 @@ import sys
 import random
 import os.path
 import time
+wincnt = 0
+count = 0
+flag1 = 0
+semicount = 0
+semiwincnt = 0
 
 count = 0
 while (True):
@@ -23,14 +28,17 @@ while (True):
     #create network with no hidden layers
     nn = FeedForwardNetwork()
     #checks to see if there is already a network created
-    if os.path.isfile("othelloNetwork.xml"):
-        print "Getting network from file..."
-        nn =  NetworkReader.readFrom("othelloNetwork.xml")
+    if os.path.isfile("othelloNetwork1.xml"):
+		if flag1 == 0:
+			flag1 = 1
+	        print "Getting network from file..."
+   
+		nn =  NetworkReader.readFrom("othelloNetwork1.xml")
     else:
         print "No network present, building new one..."
         inLayer = LinearLayer(192)
         hiddenLayer1 = SigmoidLayer(128)
-        hiddenLayer2 = SoftmaxLayer(80)
+        hiddenLayer2 = LinearLayer(80)
         hiddenLayer3 = SigmoidLayer(33)
         outLayer = SoftmaxLayer(64)
         nn.addInputModule(inLayer)
@@ -55,9 +63,15 @@ while (True):
     if othello.getWinner() == randomPlayer.color:
         outcome = -1
         print "Greedy Player wins over Smart Player"
+        count += 1
+        semicount += 1
     elif othello.getWinner() == smartPlayer.color:
         outcome = 1
         print "Smart Player wins over Greedy Player"
+        wincnt += 1
+        count += 1
+        semicount += 1
+        semiwincnt += 1
     else:
         outcome = 0
         print "Tie Game"
@@ -66,9 +80,17 @@ while (True):
     if (ds != None):
         trainer = BackpropTrainer(nn, dataset=ds)
         trainer.trainUntilConvergence(maxEpochs=100)
-        NetworkWriter.writeToFile(nn, "othelloNetwork.xml")
+        NetworkWriter.writeToFile(nn, "othelloNetwork1.xml")
     print "Terminate now to safely save"
     time.sleep(3)
 
-    print count
-    count += 1
+    perc = float(wincnt) / float(count)
+    perc *= float(100)
+    print perc
+
+    if semicount == 20:
+		semiperc = float(semiwincnt) / float(semicount)
+		semiperc *= float(100)
+		print "Last ", semicount, " games: ", semiperc, "%"
+		semicount = 0
+		semiwincnt = 0
