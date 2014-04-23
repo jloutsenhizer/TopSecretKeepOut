@@ -51,7 +51,7 @@ def tTest(name1,results1,name2):
 
 othello = Othello()
 
-nn =  NetworkReader.readFrom("othelloNetwork.xml")
+nn =  NetworkReader.readFrom("othelloNetwork7.xml")
 player1 = SmartPlayer(nn,othello.boardSize) #change this to some AI you want to look for the win rate of
 player2 = TacticalPlayer() #change this to some AI you want to compare against
 
@@ -65,4 +65,4 @@ for x in xrange(0,numTrials):
     data = runOneTest()
     dataset.append(data)
 
-tTest("Network Player",dataset,"Tactical Player") #update these names so output is readable depending on input
+tTest("Smart Player 7",dataset,"Random Player") #update these names so output is readable depending on input

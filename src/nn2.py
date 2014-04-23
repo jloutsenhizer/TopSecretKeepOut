@@ -9,6 +9,7 @@ from SmartPlayer import SmartPlayer
 from GreedyPlayer import GreedyPlayer
 from Othello import Othello
 from Player import playGame
+from TacticalPlayer import TacticalPlayer
 import sys
 import random
 import os.path
@@ -47,20 +48,20 @@ while (True):
 
     othello = Othello()
     smartPlayer = SmartPlayer(nn,othello.boardSize)
-    greedyPlayer = GreedyPlayer()
+    greedyPlayer = TacticalPlayer()
     greedyPlayer.newGame(othello,random.choice([othello.WHITE_PLAYER,othello.BLACK_PLAYER]));
     smartPlayer.newGame(othello,greedyPlayer.enemy);
 
     playGame(othello,greedyPlayer,smartPlayer)
     if othello.getWinner() == greedyPlayer.color:
         outcome = -1
-        print "Greedy Player wins over Network Player 2"
+        print "Tactical Player wins over Network Player 2"
         count += 1
         semicount += 1
 	
     elif othello.getWinner() == smartPlayer.color:
         outcome = 1
-        print "Network Player 2 wins over Greedy Player"		
+        print "Network Player 2 wins over Tactical Player"		
     	count += 1
         wincnt += 1
         semicount += 1
@@ -74,7 +75,7 @@ while (True):
     ds = smartPlayer.gameOver(outcome)
     if (ds != None):
         trainer = BackpropTrainer(nn, dataset=ds)
-        trainer.trainUntilConvergence(maxEpochs=50)
+        trainer.trainUntilConvergence(maxEpochs=200)
         NetworkWriter.writeToFile(nn, "othelloNetwork2.xml")
     #print "Terminate now to safely save"
     #time.sleep(3)
